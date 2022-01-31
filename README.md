@@ -1,6 +1,6 @@
-# Sketchsoft Simple Starter - frontend
+# PanivKit - frontend Simple Starter
 
-Simple frontend start boilerplate which has essential dependencies used in Feather.
+Simple frontend start boilerplate which has essential dependencies.
 
 ## Installation
 clone this repository to your project directory
