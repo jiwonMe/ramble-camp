@@ -3,7 +3,9 @@
   "packageManager": "yarn@3.1.1",
   "type": "module",
   "dependencies": {
+    "@typeform/embed": "^1.34.0",
     "esbuild": "^0.14.5",
+    "firebase": "^9.6.8",
     "lit": "^2.0.2",
     "storybook": "^6.4.9",
     "typescript": "^4.5.4"
