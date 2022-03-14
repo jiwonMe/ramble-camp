@@ -67,21 +67,8 @@ export class Intro extends LitElement {
 
   constructor() {
     super();
-    this.addEventListener('pointerup', this.slideUp);
-    setTimeout(() => this.slideUp(), 2000);
-  }
-
-  private slideUp() {
-    let y = 0;
-    const intervalId = setInterval(() => {
-      y += 10;
-      console.log(y);
-      this.style.top = `${-y}px`;
-      if (y > window.innerHeight) {
-        clearInterval(intervalId);
-        this.remove();
-      }
-    });
+    this.addEventListener('pointerdown', () => this.remove());
+    setTimeout(() => this.remove(), 1500);
   }
 
   render() {

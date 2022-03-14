@@ -1,9 +1,12 @@
 import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
+import P5 from 'p5';
 import { Intro } from './intro';
 import { Typeform } from './typeform';
 import { Visualization } from './visualization';
 import { Profile } from './profile';
+import { hamburgerSVG } from './hamburger.svg';
+import { sketch } from './sketch';
 
 @customElement('my-app')
 export class MyApp extends LitElement {
@@ -11,6 +14,15 @@ export class MyApp extends LitElement {
   private Typeform = new Typeform();
   private Visualization = new Visualization();
   private Profile = new Profile();
+
+  private Canvas = document.createElement('div');
+  private p5: P5;
+
+  constructor() {
+    super();
+    this.Canvas.id = 'p5';
+    this.p5 = new P5(sketch, this.Canvas);
+  }
 
   static get styles() {
     return css`
@@ -38,6 +50,37 @@ export class MyApp extends LitElement {
 
         font-family: 'GmarketSansMedium';
       }
+
+      button {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
+
+      #menu {
+        position: absolute;
+        right: 12px;
+      }
+
+      #fg {
+        position: fixed;
+        z-index: 100000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        background-image: url('https://www.transparenttextures.com/patterns/textured-paper.png');
+        mix-blend-mode: soft-light;
+        pointer-events: none;
+      }
+
+      #p5 {
+        position: fixed;
+        top: 48px;
+        z-index: 5;
+      }
     `;
   }
 
@@ -45,8 +88,14 @@ export class MyApp extends LitElement {
     this.Typeform.typeform.hidden = true;
   }
 
+  openMenu() {
+    alert('menu는 준비중입니다');
+  }
+
   render() {
     return html`
+    <div id='fg'>
+    </div>
     <nav>
       <h1>산책캠프</h1>
       <div>
@@ -57,10 +106,16 @@ export class MyApp extends LitElement {
           @click=${this.handleClick}
         >survey 닫기</button>
       </div>
+      <button id='menu'
+        @click=${this.openMenu}
+      >
+        ${hamburgerSVG}
+      </button>
     </nav>
     ${this.Intro}
     ${this.Typeform}
     ${this.Visualization}
+
     ${this.Profile}
     `;
   }
